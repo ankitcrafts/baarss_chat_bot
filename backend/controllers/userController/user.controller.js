@@ -23,6 +23,10 @@ export const createUserContoller = async (req, res) => {
 
     // Generate JWT token for creating New User
     const token = await user.generateJWT();
+
+    // Remove the password from the user object (i.e. Password will not be shown to the frontend object)
+    delete user._doc.password;
+
     res.status(201).json({
       message: "User created successfully",
       status: true,
@@ -85,6 +89,10 @@ export const loginUserContoller = async (req, res) => {
 
     // Generate JWT token for login the User
     const token = await user.generateJWT();
+
+    // Remove the password from the user object (i.e. Password will not be shown to the frontend object)
+    delete user._doc.password;
+
     res.status(200).json({
       message: "User logged in successfully",
       status: true,
