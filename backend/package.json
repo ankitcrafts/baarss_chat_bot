@@ -8,6 +8,26 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./bin/index"
   },
+  "keywords": [
+    "NodeJs",
+    "MongoDb",
+    "Sequelize",
+    "Jwt",
+    "token",
+    "Redis",
+    "Socket.io",
+    "Realtime Chat",
+    "Express",
+    "Typescript",
+    "Javascript",
+    "Backend",
+    "MVC",
+    "REST API",
+    "API",
+    "CRUD",
+    "CRUD API",
+    "Google Gemini API"
+  ],
   "author": "Ankit",
   "license": "ISC",
   "dependencies": {
