@@ -5,6 +5,7 @@ import connectDatabase from './db/dbConfig.js';
 import cookieParser from 'cookie-parser';
 // Import Routes
 import userRoutes from './routes/userRoutes/user.routes.js';
+import projectRoutes from './routes/userRoutes/projectRoutes/project.routes.js';
 
 connectDatabase();
 
@@ -23,6 +24,9 @@ app.get('/', (req, res) => {
 });
 
 // Routes
+// User routes
 app.use('/api/users', userRoutes);
+// Project routes
+app.use('/api/projects', projectRoutes);
 
 export default app;

@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const projectSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const projectSchema = new Schema({
   name: {
     type: String,
     lowercase: true,
@@ -10,7 +12,7 @@ const projectSchema = new mongoose.Schema({
   },
   users: [
     {
-      types: mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
   ],

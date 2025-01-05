@@ -1,19 +1,38 @@
-import pojectModel from "../models/project.model.js";
-import projectService from "../services/project.service.js";
+import pojectModel from "../../models/project.model.js";
+import * as projectService from "../../services/poject.service.js"
+import userModel from "../../models/user.model.js";
+import { validationResult } from "express-validator";
 
 // Create Project
 export const createProject = async (req, res) => {
-  const errors = validationResault(req);
+  const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+  try {
+    const { name } = req.body;
 
-//   try {
-//     const project = await projectService.createProject(req.body);
+    //   To get the ID of the Logged in User
+    const loggedInUserId = await userModel.findOne({ email: req.body.email });
+    const userId = loggedInUserId._id;
 
-//     res.status(201).json({ project });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
+    const newProject = await projectService.createProjectService({
+      name,
+      userId,
+    });
+
+    res.status(201).json({
+        newProject,
+        message: "Project Created Successfully",
+        status: true,
+        code: 201
+    });
+  } catch (error) {
+    res.status(500).json({ 
+        error: error.message | "Internal Server Error",
+        status: false,
+        code: 500
+    });
+  }
 };
