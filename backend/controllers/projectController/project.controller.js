@@ -14,10 +14,10 @@ export const createProject = async (req, res) => {
     const { name } = req.body;
 
     //   To get the ID of the Logged in User
-    const loggedInUserId = await userModel.findOne({ email: req.body.email });
+    const loggedInUserId = await userModel.findOne({ email: req.user.email });
     const userId = loggedInUserId._id;
 
-    const newProject = await projectService.createProjectService({
+    const newProject = await projectService.createProject({
       name,
       userId,
     });
@@ -29,6 +29,7 @@ export const createProject = async (req, res) => {
         code: 201
     });
   } catch (error) {
+    console.log(error);    
     res.status(500).json({ 
         error: error.message | "Internal Server Error",
         status: false,
