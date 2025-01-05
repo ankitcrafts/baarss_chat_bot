@@ -1,0 +1,18 @@
+import ProjectModel from "../models/project.model";
+
+
+export const createProject = async ({
+    name, userId
+}) => { 
+    if (!name) {
+        throw new Error("Name is required");
+    }
+    if(!userId) {
+        throw new Error("User is required");
+    }
+
+    const project = new ProjectModel({
+        name,
+        users: [userId]
+    });
+}
