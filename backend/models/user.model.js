@@ -8,7 +8,7 @@ const userSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: [true, 'Project Name must be unique.'],
     trim: true,
     lowercase: true,
     minLength: [6, "Email must be at least 6 characters long"],
