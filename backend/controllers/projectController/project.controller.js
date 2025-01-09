@@ -12,7 +12,6 @@ export const createProject = async (req, res) => {
   }
 
   try {
-
     const { name } = req.body;
     //   To get the ID of the Logged in User
     const loggedInUserId = await userModel.findOne({ email: req.user.email });
@@ -29,6 +28,33 @@ export const createProject = async (req, res) => {
       status: true,
       code: 201,
     });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      error: error.message | "Internal Server Error",
+      status: false,
+      code: 500,
+    });
+  }
+};
+
+// Get All Projects
+export const getAllProjects = async (req, res) => {
+  try {
+    const loggedInUser = await userModel.findOne({
+      email: req.user.email,
+    });
+    const allUserProjects = await projectService.getAllProjectsById({
+      userId: loggedInUser._id,
+    });
+
+    return res.status(200).json({
+      projects: allUserProjects,
+      message: "Projects Fetched Successfully",
+      status: true,
+      code: 200,
+    });
+
   } catch (error) {
     console.log(error);
     res.status(500).json({

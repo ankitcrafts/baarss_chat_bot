@@ -6,7 +6,7 @@ export const createProjectService = async ({ name, userId }) => {
     throw new Error("Name is required");
   }
   if (!userId) {
-    throw new Error("User is required");
+    throw new Error("User ID is required");
   }
 
   let project;
@@ -24,3 +24,15 @@ export const createProjectService = async ({ name, userId }) => {
 
   return project;
 };
+
+export const getAllProjectsById = async ({  userId }) => {
+  if (!userId) {
+    throw new Error('User ID is required');
+  }
+
+  const allUserProjects = await projectModel.find({
+    users: userId,
+  });
+  
+  return allUserProjects; 
+}
